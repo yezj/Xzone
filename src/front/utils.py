@@ -35,15 +35,15 @@ def signed(method):
 def token(method):
     @functools.wraps(method)
     def wraps(self, *args, **kwargs):
-        access_token = self.get_argument("access_token", None)
-        user_id = self.get_argument("user_id", None)
-        login_url = BASE_URL + '/user/login/?access_token=%s&user_id=%s' % (access_token, user_id)
-        r = requests.get(login_url)
-        print r.status_code, r.json()
-        if r.status_code == 200 and 'user_id' in r.json():
-            pass
-        else:
-            self.write(r.text)
+        if self.has_arg("access_token") and self.has_arg("user_id"):
+            access_token = self.get_argument("access_token")
+            user_id = self.get_argument("user_id")
+            login_url = BASE_URL + '/user/login/?access_token=%s&user_id=%s' % (access_token, user_id)
+            r = requests.get(login_url)
+            if r.status_code == 200 and 'user_id' in r.json():
+                self.user_id = r.json()['user_id']
+            else:
+                self.write(r.text)
         return method(self, *args, **kwargs)
 
     return wraps

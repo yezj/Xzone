@@ -28,26 +28,11 @@ class CrossdomainHandler(ApiHandler):
         self.render('crossdomain.xml')
 
 
-
-@handler
-class TestHandler(ApiHandler):
-    @storage.databaseSafe
-    @defer.inlineCallbacks
-    @utils.token
-    @api('Index', '/', [
-        Param('channel', True, str, 'putaogame', 'putaogame', 'channel'),
-        Param('user_id', False, str, '1', '1', 'user_id'),
-        Param('access_token', False, str, '55526fcb39ad4e0323d32837021655300f957edc',
-              '55526fcb39ad4e0323d32837021655300f957edc', 'access_token'),
-    ], filters=[ps_filter], description="Test")
-    def post(self):
-        nownum = yield self.redis.get(
-            'zone:%s:%s' % (1, datetime.datetime.now().strftime('%Y%m%d')))
-
 @handler
 class IndexHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
+    @utils.token
     @api('Index', '/', [
         Param('channel', True, str, 'putaogame', 'putaogame', 'channel'),
         Param('user_id', False, str, '1', '1', 'user_id'),
@@ -101,7 +86,7 @@ class IndexHandler(ApiHandler):
                                              notices=notice_dict, title=D.ZONENAME.get(str(zoneid), ''))
 
                     if self.has_arg('access_token'):
-                        idcard = yield self.redis.get('zone:%s:%s' % (zoneid, self.arg('access_token')))
+                        idcard = yield self.redis.get('zone:%s:%s' % (zoneid, self.user_id))
                         if idcard:
                             record[zoneid] = idcard
                             # if rec:
