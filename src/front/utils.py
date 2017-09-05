@@ -43,9 +43,9 @@ def token(method):
             if r.status_code == 200 and 'user_id' in r.json():
                 self.user_id = r.json()['user_id']
             else:
-                self.user_id = None
                 self.write(r.text)
-                return 
+        else:
+            self.user_id = None
         return method(self, *args, **kwargs)
 
     return wraps
