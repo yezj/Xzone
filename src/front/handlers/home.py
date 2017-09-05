@@ -104,7 +104,9 @@ class IndexHandler(ApiHandler):
         else:
             raise web.HTTPError(404)
 
+    get = post
 
+    
 @handler
 class UpdateHandler(ApiHandler):
     @storage.databaseSafe
