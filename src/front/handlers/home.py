@@ -48,7 +48,8 @@ class IndexHandler(ApiHandler):
             else:
                 raise web.HTTPError(404)
         else:
-            raise web.HTTPError('400', 'Argument error')
+            self.write(dict(err=E.ERR_ARGUMENT, msg=E.errmsg(E.ERR_ARGUMENT)))
+            return
         if channel:
             res = yield self.sql.runQuery("SELECT a.id, a.zoneid, a.domain, a.maxnum, a.status, a.index FROM"
                                           " core_zone AS a, core_zone_channels AS b WHERE a.id=b.zone_id AND"
