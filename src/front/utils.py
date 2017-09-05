@@ -35,7 +35,7 @@ def token(method):
     def wraps(self, *args, **kwargs):
         print self.get_argument("access_token", None)
         print self.get_argument("user_id", None)
-        print self
+        self.write('ok')
         return method(self, *args, **kwargs)
 
     return wraps
