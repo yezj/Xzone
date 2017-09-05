@@ -39,7 +39,7 @@ class IndexHandler(ApiHandler):
         Param('access_token', False, str, '55526fcb39ad4e0323d32837021655300f957edc',
               '55526fcb39ad4e0323d32837021655300f957edc', 'access_token'),
     ], filters=[ps_filter], description="Index")
-    def post(self):
+    def get(self):
         if self.has_arg('channel'):
             channels = yield self.sql.runQuery("SELECT id FROM core_channel WHERE slug=%s LIMIT 1",
                                                (self.arg("channel"),))
@@ -104,9 +104,8 @@ class IndexHandler(ApiHandler):
         else:
             raise web.HTTPError(404)
 
-    get = post
 
-    
+
 @handler
 class UpdateHandler(ApiHandler):
     @storage.databaseSafe
