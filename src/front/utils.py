@@ -39,7 +39,9 @@ def token(method):
         user_id = self.get_argument("user_id", None)
         login_url = BASE_URL + '/user/login/?access_token=%s&user_id=%s' % (access_token, user_id)
         r = requests.get(login_url)
-        print r.status_code, 'user_id' in r.json()
+        print r.status_code, r.json()
+        if r.status_code == 200 and 'user_id' in r.json():
+            pass
         return method(self, *args, **kwargs)
 
     return wraps
