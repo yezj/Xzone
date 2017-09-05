@@ -81,7 +81,9 @@ class IndexHandler(ApiHandler):
 
                     try:
                         nownum = yield self.redis.get(
-                            'zone:%s:%s' % (zoneid, datetime.datetime.now().strftime('%Y%m%d'))) or 0
+                            'zone:%s:%s' % (zoneid, datetime.datetime.now().strftime('%Y%m%d'))) \
+                        if not nownum:
+                            nownum = 0
                     except Exception:
                         nownum = 0
 
