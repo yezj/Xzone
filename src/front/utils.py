@@ -39,11 +39,13 @@ def token(method):
             access_token = self.get_argument("access_token")
             user_id = self.get_argument("user_id")
             login_url = BASE_URL + '/user/login/?access_token=%s&user_id=%s' % (access_token, user_id)
-            r = requests.get(login_url)
+            r = yield requests.get(login_url)
             if r.status_code == 200 and 'user_id' in r.json():
                 self.user_id = r.json()['user_id']
             else:
+                self.user_id = None
                 self.write(r.text)
+                return 
         else:
             self.user_id = None
         return method(self, *args, **kwargs)
