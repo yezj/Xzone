@@ -12,7 +12,7 @@ EMAIL_USER = 'hello'
 EMAIL_PASSWORD = 'world'
 
 TOPDOMAIN = '.putaogame.com'
-BASE_URL = 'http://localhost:8000'
+BASE_URL = 'http://localhost:8080'
 FRONT_URL = 'http://localhost:8888'
 CDN_URL = 'http://cdn.putaogame.com/ptkingdom/'
 DOMAIN = ''
