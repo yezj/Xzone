@@ -46,7 +46,9 @@ class IndexHandler(ApiHandler):
             if channels:
                 channel, = channels[0]
             else:
-                raise web.HTTPError(404)
+                self.write(dict(err=E.ERR_CHANNEL, msg=E.errmsg(E.ERR_CHANNEL)))
+                return
+
         else:
             self.write(dict(err=E.ERR_ARGUMENT, msg=E.errmsg(E.ERR_ARGUMENT)))
             return
