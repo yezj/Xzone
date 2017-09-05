@@ -41,7 +41,8 @@ class TestHandler(ApiHandler):
               '55526fcb39ad4e0323d32837021655300f957edc', 'access_token'),
     ], filters=[ps_filter], description="Test")
     def post(self):
-        pass
+        nownum = yield self.redis.get(
+            'zone:%s:%s' % (1, datetime.datetime.now().strftime('%Y%m%d')))
 
 @handler
 class IndexHandler(ApiHandler):
