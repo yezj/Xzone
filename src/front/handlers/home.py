@@ -88,7 +88,7 @@ class IndexHandler(ApiHandler):
                     zone_dict[zoneid] = dict(domain=domain, maxnum=maxnum, nownum=nownum, status=status, index=index, \
                                              notices=notice_dict, title=D.ZONENAME.get(str(zoneid), ''))
 
-                    if self.has_arg('access_token'):
+                    if self.user_id:
                         idcard = yield self.redis.get('zone:%s:%s' % (zoneid, self.user_id))
                         if idcard:
                             record[zoneid] = idcard
