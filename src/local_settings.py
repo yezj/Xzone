@@ -1,8 +1,8 @@
 #DATA_HOST = '192.168.253.128'
 DATA_HOST = '127.0.0.1'
-DATA_NAME = 'ptkzone'
+DATA_NAME = 'xzone'
 DATA_USER = 'deploy'
-DATA_PASSWORD = '4wxto.kNAE.cujML97'
+DATA_PASSWORD = 'asdf12345678'
 DATA_DBID = 1
 
 EMAIL_HOST = 'smtp.gmail.com'
