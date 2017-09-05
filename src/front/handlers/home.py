@@ -30,9 +30,9 @@ class CrossdomainHandler(ApiHandler):
 
 @handler
 class IndexHandler(ApiHandler):
+    @utils.token
     @storage.databaseSafe
     @defer.inlineCallbacks
-    @utils.token
     @api('Index', '/', [
         Param('channel', True, str, 'putaogame', 'putaogame', 'channel'),
         Param('user_id', False, str, '1', '1', 'user_id'),
