@@ -9,6 +9,8 @@ import uuid
 from cyclone import web
 import D
 import random
+import requests
+from local_settings import BASE_URL
 
 
 def signed(method):
@@ -33,9 +35,11 @@ def signed(method):
 def token(method):
     @functools.wraps(method)
     def wraps(self, *args, **kwargs):
-        print self.get_argument("access_token", None)
-        print self.get_argument("user_id", None)
-        self.write('ok')
+        access_token = self.get_argument("access_token", None)
+        user_id = self.get_argument("user_id", None)
+        login_url = BASE_URL + '/user/login/?access_token=%s&user_id=%s' % (access_token, user_id)
+        r = requests.get(login_url)
+        print r.status_code, r.text
         return method(self, *args, **kwargs)
 
     return wraps
@@ -788,8 +792,8 @@ class E(object):
                 hero = heros['one']
                 cword += (hero['star'] * 5 + hero['color'] * 3) * user['xp'] / 100000 * 100
             gold, feat = \
-            [(D.HUNTAGAINST[i * 4 + 2], D.HUNTAGAINST[i * 4 + 3]) for i in xrange(0, len(D.HUNTAGAINST) / 4) if
-             csword <= D.HUNTAGAINST[i * 4 + 1] and csword >= D.HUNTAGAINST[i * 4]][0]
+                [(D.HUNTAGAINST[i * 4 + 2], D.HUNTAGAINST[i * 4 + 3]) for i in xrange(0, len(D.HUNTAGAINST) / 4) if
+                 csword <= D.HUNTAGAINST[i * 4 + 1] and csword >= D.HUNTAGAINST[i * 4]][0]
             earn = dict(gold=gold, feat=feat)
         except LookupError:
             earn = {'gold': 0, 'feat': 0}
@@ -818,8 +822,8 @@ class E(object):
                 cword += (hero['star'] * 5 + hero['color'] * 3) * user['xp'] / 100000 * 100
 
             gold, feat = \
-            [(D.HUNTRECLAIM[i * 4 + 2], D.HUNTRECLAIM[i * 4 + 3]) for i in xrange(0, len(D.HUNTRECLAIM) / 4) if
-             csword <= D.HUNTRECLAIM[i * 4 + 1] and csword >= D.HUNTRECLAIM[i * 4]][0]
+                [(D.HUNTRECLAIM[i * 4 + 2], D.HUNTRECLAIM[i * 4 + 3]) for i in xrange(0, len(D.HUNTRECLAIM) / 4) if
+                 csword <= D.HUNTRECLAIM[i * 4 + 1] and csword >= D.HUNTRECLAIM[i * 4]][0]
             earn = dict(gold=gold, feat=feat)
         except Exception:
             earn = {'gold': 0, 'feat': 0}
@@ -829,8 +833,9 @@ class E(object):
     def buy4hp(times):
         try:
             rock, hp = \
-            [(D.HPBUY[i * 2 + 1], D.HPBUY[i * 2 + 2]) for i in xrange(0, len(D.HPBUY) / 3) if times == D.HPBUY[i * 2]][
-                0]
+                [(D.HPBUY[i * 2 + 1], D.HPBUY[i * 2 + 2]) for i in xrange(0, len(D.HPBUY) / 3) if
+                 times == D.HPBUY[i * 2]][
+                    0]
             cost = dict(rock=rock, hp=hp)
         except Exception:
             cost = dict(rock=50, hp=120)
