@@ -42,6 +42,8 @@ def token(method):
         print r.status_code, r.json()
         if r.status_code == 200 and 'user_id' in r.json():
             pass
+        else:
+            self.write(r.text)
         return method(self, *args, **kwargs)
 
     return wraps
