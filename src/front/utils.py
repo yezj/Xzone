@@ -45,6 +45,7 @@ def token(method):
             else:
                 self.user_id = None
                 self.write(r.text)
+                return 
         return method(self, *args, **kwargs)
 
     return wraps
