@@ -154,6 +154,7 @@ class E(object):
     ERR_SYNC = 4
     ERR_REPEAT = 5
     ERR_ARGUMENT = 6
+    ERR_CHANNEL = 7
     ERR_USER_NOTFOUND = 101
     ERR_USER_ABNORMAL = 102
     ERR_USER_BEBANKED = 103
@@ -249,6 +250,7 @@ class E(object):
         ERR_SYNC: u'数据同步错误',
         ERR_REPEAT: u'重复操作',
         ERR_ARGUMENT: u'参数错误',
+        ERR_CHANNEL: u'渠道错误',
         ERR_USER_CREATED: u'创建用户失败',
         ERR_USER_NOTFOUND: u'用户不存在',
         ERR_USER_ABNORMAL: u'账户发生异常',
