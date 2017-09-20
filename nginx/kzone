@@ -10,22 +10,22 @@ upstream kzone {
 server {
     listen 80;
 
-    access_log /home/ubuntu/srv/PtKZone/var/nginx.kzone.access.log access.kzone;
-    error_log /home/ubuntu/srv/PtKZone/var/nginx.kzone.error.log;
+    access_log /root/srv/Xzone/var/nginx.kzone.access.log access.kzone;
+    error_log /root/srv/Xzone/var/nginx.kzone.error.log;
 
-    server_name kzone.putaogame.com;
+    server_name admin.zone.525fun.com;
 
     client_max_body_size 200m;
 
     location /static {
-        alias /home/ubuntu/srv/PtKZone/src/static;
+        alias /root/srv/Xzone/src/static;
         if ($query_string) {
             expires max;
         }
     }
 
     location /media {
-        alias /home/ubuntu/srv/PtKZone/src/media;
+        alias /root/srv/Xzone/src/media;
         if ($query_string) {
             expires max;
         }
