@@ -98,7 +98,7 @@ class IndexHandler(ApiHandler):
                             #     rec = pickle.loads(rec)
                             #     record = rec
                         else:pass
-                    record[1] = '7he74dbd44fe7b43ef932ddc9ba612b0a7'
+                    #record[1] = '7he74dbd44fe7b43ef932ddc9ba612b0a7'
             ret = dict(zone=zone_dict, record=record, timestamp=int(time.time()))
             reb = zlib.compress(escape.json_encode(ret))
             self.write(ret)
