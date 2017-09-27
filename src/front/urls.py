@@ -3,10 +3,10 @@ import api_doc
 from twisted.internet.tcp import _AbortingMixin
 from wiapi import api_manager
 from front.handlers import home
-from front.debug import gmprod
-from front.debug import gmaccount
+# from front.debug import gmprod
+# from front.debug import gmaccount
 from front.debug import gmhero
-from front.handlers import pay
+# from front.handlers import pay
 from local_settings import DEBUG
 
 url_patterns = [
@@ -19,8 +19,8 @@ url_patterns = [
     # (r'/flushdb/', home.FlushdbHandler),
 
     # gm tools
-    (r'/gm/account/edit/', gmaccount.EditHandler),
-    (r'/gm/prod/edit/', gmprod.EditProdHandler),
+    # (r'/gm/account/edit/', gmaccount.EditHandler),
+    # (r'/gm/prod/edit/', gmprod.EditProdHandler),
 
 
     (r'/crossdomain\.xml', home.CrossdomainHandler),

@@ -34,7 +34,7 @@ class IndexHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
     @api('Index', '/', [
-        Param('channel', True, str, 'putaogame', 'putaogame', 'channel'),
+        Param('channel', True, str, 'test1', 'test1', 'channel'),
         Param('user_id', False, str, '1', '1', 'user_id'),
         Param('access_token', False, str, '55526fcb39ad4e0323d32837021655300f957edc',
               '55526fcb39ad4e0323d32837021655300f957edc', 'access_token'),
@@ -107,17 +107,16 @@ class IndexHandler(ApiHandler):
 
 
 
-@handler
 class UpdateHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
     @api('Update', '/update/', [
-        Param('channel', True, str, 'putaogame', 'putaogame', 'channel'),
+        Param('channel', True, str, 'test1', 'test1', 'channel'),
         Param('version', True, str, 'v1.1', 'v1.1', 'version'),
     ], filters=[ps_filter], description="Update")
     def get(self):
         try:
-            channel = self.get_argument('channel', 'putaogame')
+            channel = self.get_argument('channel', 'test1')
             version = str(self.get_argument('version'))
         except Exception:
             raise web.HTTPError(400, 'Argument error')
@@ -180,12 +179,12 @@ class UpdateHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
     @api('Update', '/update/', [
-        Param('channel', True, str, 'putaogame', 'putaogame', 'channel'),
+        Param('channel', True, str, 'test1', 'test1', 'channel'),
         Param('version', True, str, 'v1.1', 'v1.1', 'version'),
     ], filters=[ps_filter], description="Update")
     def post(self):
         try:
-            channel = self.get_argument('channel', 'putaogame')
+            channel = self.get_argument('channel', 'test1')
             version = str(self.get_argument('version'))
         except Exception:
             raise web.HTTPError(400, 'Argument error')
@@ -236,7 +235,7 @@ class UpdateHandler(ApiHandler):
                 return
 
 
-@handler
+
 class BindHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
@@ -281,7 +280,6 @@ class BindHandler(ApiHandler):
         self.write(ret)
 
 
-@handler
 class GetHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
@@ -321,7 +319,6 @@ class GetHandler(ApiHandler):
         self.write(ret)
 
 
-@handler
 class IdcardHandler(ApiHandler):
     @storage.databaseSafe
     @defer.inlineCallbacks
@@ -343,7 +340,6 @@ class IdcardHandler(ApiHandler):
         self.write('ok')
 
 
-@handler
 class FlushdbHandler(ApiHandler):
     @storage.databaseSafe
     # @defer.inlineCallbacks
